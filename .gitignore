@@ -1,0 +1,5 @@
+.venv
+__pycache__
+.vscode
+templates
+crud_generator.py
