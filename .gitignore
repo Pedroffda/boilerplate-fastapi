@@ -3,3 +3,4 @@ __pycache__
 .vscode
 templates
 crud_generator.py
+.env
