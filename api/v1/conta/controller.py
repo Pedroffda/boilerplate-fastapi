@@ -19,6 +19,7 @@ router = APIRouter(
 
 T_Session = Annotated[Session, Depends(get_db)]
 T_OAuth2Form = Annotated[OAuth2PasswordRequestForm, Depends()]
+T_CurrentUser = Annotated[Usuario, Depends(get_current_user)]
 
 @router.post('/registrar', status_code=status.HTTP_201_CREATED)
 def create_user(user: UsuarioRegister, db: T_Session):
@@ -33,5 +34,5 @@ async def refresh_token(current_user: Usuario = Depends(get_current_user)):
     return account_service.refresh_token(current_user)
 
 @router.get("/me", status_code=status.HTTP_200_OK, response_model=UsuarioResponse)
-async def get_me(db: T_Session, current_user: Usuario = Depends(get_current_user)):
+async def get_me(db: T_Session, current_user: T_CurrentUser):
     return account_service.get_me(db, current_user.id)

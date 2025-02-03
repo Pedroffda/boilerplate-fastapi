@@ -19,6 +19,7 @@ from api.utils.exceptions import (
     ExceptionNotFound,
     ExceptionInternalServerError,
     ExceptionInvalidData,
+    ExceptionForbidden
 )
 
 def handle_sqlalchemy_errors(func):
@@ -60,7 +61,7 @@ def handle_sqlalchemy_errors(func):
             db.rollback()
             raise ExceptionInternalServerError(detail=f"Erro no SQLAlchemy: {str(e)}")
         # Exceções personalizadas propagadas diretamente
-        except (ExceptionBadRequest, ExceptionNotFound, ExceptionInvalidData, ExceptionConflict) as e:
+        except (ExceptionBadRequest, ExceptionNotFound, ExceptionInvalidData, ExceptionConflict, ExceptionForbidden) as e:
             raise e
         except Exception as e:
             db.rollback()

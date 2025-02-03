@@ -1,3 +1,4 @@
+from datetime import datetime
 from sqlalchemy.orm import Session
 from passlib.context import CryptContext
 from api.utils.decorators import handle_sqlalchemy_errors
@@ -95,6 +96,8 @@ class UsuarioServices:
             raise ExceptionBadRequest(self.not_found_message)
         
         usuario.flg_excluido = True
+        usuario.flg_ativo = False
+        usuario.deleted_at = datetime.now()
         db.commit()
         db.refresh(usuario)
 

@@ -1,15 +1,16 @@
+from typing import Optional
 from pydantic import UUID4, BaseModel
 
 class UsuarioRegister(BaseModel):
     nome: str
     email: str
     senha: str
+    id_politica: Optional[str] = None
 
 class UsuarioResponse(BaseModel):
     id: UUID4
     nome: str
     email: str
-    role: str
 
 class UsuarioLogin(BaseModel):
     username: str

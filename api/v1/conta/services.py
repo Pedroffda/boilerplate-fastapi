@@ -16,14 +16,13 @@ class ContaServices:
     @handle_sqlalchemy_errors
     def register(self, db: Session, obj: UsuarioCreate) -> Usuario:
         usuario_services.validate_user_data(db, obj)
-
+        
         hashed_password = pwd_context.hash(obj.senha)
 
         novo_usuario = Usuario(
             nome=obj.nome,
             email=obj.email,
-            senha=hashed_password,
-            role = "user"
+            senha=hashed_password
         )
         
         db.add(novo_usuario)

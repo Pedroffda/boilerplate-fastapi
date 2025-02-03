@@ -6,7 +6,8 @@ from passlib.context import CryptContext
 from fastapi.security import OAuth2PasswordBearer
 from sqlalchemy.orm import Session
 from api.utils.db_conection import get_db
-from api.v1._database.models import Usuario
+from api.utils.exceptions import ExceptionForbidden
+from api.v1._database.models import Usuario, AccessPolicy
 from api.utils.settings import Settings
 
 settings = Settings()
@@ -60,3 +61,42 @@ async def get_current_user(
     if usuario is None:
         raise credentials_exception
     return usuario
+
+def check_access(
+    db: Session,
+    current_user: Usuario,
+    action: str,
+    resource_id: str = "*",
+):
+    politica = get_user_policy(db, current_user)
+    validate_policy(politica)
+    validate_action(politica, action)
+    validate_resource(politica, resource_id)
+    validate_conditions(politica, current_user)
+
+def get_user_policy(db: Session, current_user: Usuario) -> AccessPolicy:
+    politica = db.query(AccessPolicy).filter(AccessPolicy.id == current_user.id_politica).first()
+    if not politica:
+        raise ExceptionForbidden("Usuário não possui política de acesso configurada.")
+    return politica
+
+def validate_policy(politica: AccessPolicy):
+    if politica.effect != "Allow":
+        raise ExceptionForbidden()
+
+def validate_action(politica: AccessPolicy, action: str):
+    if "*" not in politica.actions and action not in politica.actions:
+        raise ExceptionForbidden("Ação não permitida.")
+
+def validate_resource(politica: AccessPolicy, resource_id: str):
+    if "*" not in politica.resources and resource_id not in politica.resources:
+        raise ExceptionForbidden("Recurso não permitido.")
+
+def validate_conditions(politica: AccessPolicy, current_user: Usuario):
+    if politica.conditions:
+        for key, condition in politica.conditions.items():
+            if key == "StringEquals":
+                for cond_field, expected_value in condition.items():
+                    user_value = getattr(current_user, cond_field, None)
+                    if user_value != expected_value:
+                        raise ExceptionForbidden(f"Condição de acesso não atendida para o campo {cond_field}.")

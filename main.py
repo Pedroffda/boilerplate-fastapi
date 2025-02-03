@@ -2,11 +2,13 @@ from fastapi import FastAPI, HTTPException
 from fastapi.responses import JSONResponse
 from api.v1.conta.controller import router as conta_router
 from api.v1.usuarios.controller import router as usuario_router
+from api.v1.politicas.controller import router as politicas_router
 
 app = FastAPI()
 
 app.include_router(conta_router)
 app.include_router(usuario_router)
+app.include_router(politicas_router)
 
 origins = ["*"]
 
