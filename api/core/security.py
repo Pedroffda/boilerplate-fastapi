@@ -5,10 +5,10 @@ from datetime import datetime, timedelta
 from passlib.context import CryptContext
 from fastapi.security import OAuth2PasswordBearer
 from sqlalchemy.orm import Session
-from api.utils.db_conection import get_db
-from api.utils.exceptions import ExceptionForbidden
+from api.core.db_conection import get_db
+from api.core.exceptions import ExceptionForbidden
 from api.v1._database.models import Usuario, AccessPolicy
-from api.utils.settings import Settings
+from api.core.settings import Settings
 
 settings = Settings()
 

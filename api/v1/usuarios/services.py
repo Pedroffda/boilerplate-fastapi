@@ -1,8 +1,8 @@
 from datetime import datetime
 from sqlalchemy.orm import Session
 from passlib.context import CryptContext
-from api.utils.decorators import handle_sqlalchemy_errors
-from api.utils.exceptions import ExceptionBadRequest
+from api.core.decorators import handle_sqlalchemy_errors
+from api.core.exceptions import ExceptionBadRequest
 from typing import Optional
 import uuid
 

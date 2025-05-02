@@ -1,11 +1,11 @@
 from fastapi import APIRouter, Depends, status
 from sqlalchemy.orm import Session
 
-from api.utils.security import check_access, get_current_user
+from api.core.security import check_access, get_current_user
 from api.v1._database.models import Usuario
 from .schema import UsuarioCreate, UsuarioUpdate, UsuarioView, UsuarioResponseList, UsuarioResponse
 from .services import usuario_services
-from api.utils.db_conection import get_db
+from api.core.db_conection import get_db
 from typing import Annotated
 
 router = APIRouter(prefix="/api/v1/usuarios", tags=["Usuarios"], dependencies=[Depends(get_current_user)])

@@ -3,8 +3,8 @@ from typing import Optional
 from sqlalchemy.orm import Session
 from api.v1._database.models import AccessPolicy
 from api.v1.politicas.schema import AccessPolicyUpdate, AccessPolicyCreate
-from api.utils.exceptions import ExceptionBadRequest
-from api.utils.decorators import handle_sqlalchemy_errors
+from api.core.exceptions import ExceptionBadRequest
+from api.core.decorators import handle_sqlalchemy_errors
 
 class PoliticasServices:
     

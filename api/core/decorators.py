@@ -13,7 +13,7 @@ from sqlalchemy.exc import (
     SQLAlchemyError,
 )
 from sqlalchemy.orm import Session
-from api.utils.exceptions import (
+from api.core.exceptions import (
     ExceptionBadRequest,
     ExceptionConflict,
     ExceptionNotFound,

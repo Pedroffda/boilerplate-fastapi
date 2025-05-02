@@ -1,8 +1,8 @@
 from typing import Annotated
 from sqlalchemy.orm import Session
-from api.utils.db_conection import get_db
+from api.core.db_conection import get_db
 from api.v1._database.models import Usuario
-from api.utils.security import check_access, get_current_user
+from api.core.security import check_access, get_current_user
 from fastapi import APIRouter, Depends, status
 from api.v1.politicas.services import politicas_services
 from api.v1.politicas.schema import AccessPolicyCreate, AccessPolicyResponse, AccessPolicyResponseList, AccessPolicyUpdate, AccessPolicyView

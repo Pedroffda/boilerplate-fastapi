@@ -4,8 +4,8 @@ from fastapi import (
 )
 from fastapi.security import OAuth2PasswordRequestForm
 from starlette import status
-from api.utils.db_conection import get_db
-from api.utils.security import get_current_user
+from api.core.db_conection import get_db
+from api.core.security import get_current_user
 from api.v1._database.models import Usuario
 from .schema import UsuarioRegister, UsuarioResponse
 from .services import account_service

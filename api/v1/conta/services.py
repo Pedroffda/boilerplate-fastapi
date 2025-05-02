@@ -1,9 +1,9 @@
 from sqlalchemy.orm import Session
 from passlib.context import CryptContext
 
-from api.utils.decorators import handle_sqlalchemy_errors
-from api.utils.exceptions import ExceptionBadRequest
-from api.utils.security import create_access_token
+from api.core.decorators import handle_sqlalchemy_errors
+from api.core.exceptions import ExceptionBadRequest
+from api.core.security import create_access_token
 from api.v1._database.models import Usuario
 from api.v1.conta.schema import UsuarioLogin
 from api.v1.usuarios.schema import UsuarioCreate
