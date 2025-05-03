@@ -1,8 +1,7 @@
+from typing import Optional
 from pydantic import BaseModel, UUID4
-from typing import Optional, List
 
-from api.v1.politicas.schema import AccessPolicyView
-
+from api.schemas.politica import AccessPolicyRead
 
 class UsuarioCreate(BaseModel):
     nome: str
@@ -22,21 +21,8 @@ class UsuarioUpdate(BaseModel):
     class Config:
         from_attributes = True
 
-class UsuarioView(BaseModel):
+class UsuarioRead(BaseModel):
     id: UUID4
     nome: str
     email: str
-    policies: Optional[AccessPolicyView] = None
-
-class UsuarioResponseList(BaseModel):
-    total: int
-    data: List[UsuarioView]
-
-    class Config:
-        from_attributes = True
-
-class UsuarioResponse(BaseModel):
-    data: List[UsuarioView]
-
-    class Config:
-        from_attributes = True
+    policies: Optional[AccessPolicyRead] = None

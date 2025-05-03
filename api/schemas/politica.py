@@ -22,21 +22,8 @@ class AccessPolicyUpdate(BaseModel):
     class Config:
         from_attributes = True
 
-class AccessPolicyView(AccessPolicyCreate):
+class AccessPolicyRead(AccessPolicyCreate):
     id: UUID4
     
-    class Config:
-        from_attributes = True
-
-class AccessPolicyResponseList(BaseModel):
-    total: int
-    data: List[AccessPolicyView]
-
-    class Config:
-        from_attributes = True
-
-class AccessPolicyResponse(BaseModel):
-    data: List[AccessPolicyView]
-
     class Config:
         from_attributes = True

@@ -1,14 +1,19 @@
-from fastapi import Depends, HTTPException
+from typing import Annotated
 import jwt
 import pytz
+
+from sqlalchemy.orm import Session
 from datetime import datetime, timedelta
 from passlib.context import CryptContext
-from fastapi.security import OAuth2PasswordBearer
-from sqlalchemy.orm import Session
+from fastapi import Depends, HTTPException
+from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
+
+from api.models.usuario import Usuario
+from api.models.access_policy import AccessPolicy
+
+from api.core.settings import Settings
 from api.core.db_conection import get_db
 from api.core.exceptions import ExceptionForbidden
-from api.v1._database.models import Usuario, AccessPolicy
-from api.core.settings import Settings
 
 settings = Settings()
 
@@ -17,6 +22,8 @@ tz = pytz.timezone('America/Sao_Paulo')
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="api/v1/contas/entrar")
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
     
+T_OAuth2Form = Annotated[OAuth2PasswordRequestForm, Depends()]    
+
 def verify_password(plain_password, hashed_password):
     return pwd_context.verify(plain_password, hashed_password)
 
