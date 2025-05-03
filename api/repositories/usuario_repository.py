@@ -10,7 +10,7 @@ from api.schemas.usuario import UsuarioCreate
 
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
-class UserRepository:
+class UsuarioRepository:
     def __init__(self, db_session: Session):
         self.db_session = db_session
 
@@ -60,6 +60,17 @@ class UserRepository:
         total = total_result.scalar_one()
         
         return users, total
+    
+    def update_password(self, user_id: int, new_password: str) -> None:
+        """Atualiza apenas a senha do usuário"""
+        hashed_password = pwd_context.hash(new_password)
+        stmt = (
+            update(Usuario)
+            .where(Usuario.id == user_id)
+            .values(senha=hashed_password)
+        )
+        self.db_session.execute(stmt)
+        self.db_session.commit()
     
     def update_user(self, user_id: int, user_data: UsuarioCreate) -> Usuario:
         """Atualiza os dados de um usuário existente."""

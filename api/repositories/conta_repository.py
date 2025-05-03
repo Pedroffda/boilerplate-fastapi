@@ -4,14 +4,14 @@ from passlib.context import CryptContext
 
 from api.core.security import T_OAuth2Form, create_access_token
 from api.models.usuario import Usuario
-from api.repositories.usuario_repository import UserRepository
+from api.repositories.usuario_repository import UsuarioRepository
 from api.schemas.usuario import UsuarioRead
 
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
 class ContaRepository:
     def __init__(self, db_session: Session):
-        self.usuario_repository = UserRepository(db_session)
+        self.usuario_repository = UsuarioRepository(db_session)
         self.db_session = db_session
         
     def _not_excluido(self):

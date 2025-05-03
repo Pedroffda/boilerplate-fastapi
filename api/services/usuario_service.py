@@ -1,10 +1,10 @@
 from api.core.exceptions import ExceptionBadRequest, ExceptionConflict, ExceptionNotFound
 from api.models.usuario import Usuario
 from api.schemas.usuario import UsuarioCreate, UsuarioRead
-from api.repositories.usuario_repository import UserRepository
+from api.repositories.usuario_repository import UsuarioRepository
 
 class UsuarioService:
-    def __init__(self, user_repository: UserRepository):
+    def __init__(self, user_repository: UsuarioRepository):
         self.user_repository = user_repository
 
     def validate_user_data(self, user_data: UsuarioCreate) -> None:
