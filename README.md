@@ -1,3 +1,5 @@
+# Boilerplate API - FastAPI
+
 ![FastAPI](https://img.shields.io/badge/FastAPI-005571?style=for-the-badge&logo=fastapi)
 ![Python](https://img.shields.io/badge/Python-3.8+-blue?style=for-the-badge&logo=python)
 ![PostgreSQL](https://img.shields.io/badge/PostgreSQL-316192?style=for-the-badge&logo=postgresql&logoColor=white)
@@ -7,54 +9,53 @@
 ![JWT](https://img.shields.io/badge/JWT-000000?style=for-the-badge&logo=json-web-tokens&logoColor=white)
 ![Docker](https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white)
 
-# Boilerplate API - FastAPI
+The **Boilerplate** API project was developed to provide user management functionalities and other related operations. This project uses **FastAPI** as the framework, **SQLAlchemy** for ORM, and **Alembic** for database migrations.
 
-A API do projeto **Boilerplate** foi desenvolvida para fornecer funcionalidades relacionadas ao gerenciamento de usuários e outras operações relacionadas. Este projeto utiliza **FastAPI** como framework, **SQLAlchemy** para ORM, e **Alembic** para migrações de banco de dados.
+## 🛠️ Technologies
 
-## 🛠️ Tecnologias
-
-| Tecnologia       | Descrição                                                                 |
+| Technology       | Description                                                                 |
 |------------------|---------------------------------------------------------------------------|
-| **FastAPI**      | Framework moderno e rápido para APIs com Python                           |
-| **SQLAlchemy**   | ORM poderoso para banco de dados                                          |
-| **Alembic**      | Ferramenta de migração de banco de dados                                  |
-| **Pydantic**     | Validação de dados e serialização                                         |
-| **JWT**          | Autenticação segura com JSON Web Tokens                                   |
-| **PostgreSQL**   | Banco de dados relacional recomendado (compatível com SQLite e MySQL)     |
-| **Redis**        | Cache e armazenamento para tokens (opcional)                              |
-| **Docker**       | Containerização para fácil deploy                                         |
----
-
-## 📦 **Instalação**
-
-### **Pré-requisitos**
-- **Python 3.8 ou superior**
-- **Banco de dados** (PostgreSQL, MySQL ou SQLite)
-- **Dependências do projeto** (instaladas via `pip`)
+| **FastAPI**      | Modern and fast API framework for Python                                  |
+| **SQLAlchemy**   | Powerful ORM for database                                                 |
+| **Alembic**      | Database migration tool                                                   |
+| **Pydantic**     | Data validation and serialization                                         |
+| **JWT**          | Secure authentication with JSON Web Tokens                                |
+| **PostgreSQL**   | Recommended relational database (compatible with SQLite and MySQL)        |
+| **Redis**        | Cache and token storage (optional)                                        |
+| **Docker**       | Containerization for easy deployment                                      |
 
 ---
 
-### **Passos para instalação**
+## 📦 **Installation**
 
-1. **Clone o repositório:**
+### **Prerequisites**
+- **Python 3.8 or higher**
+- **Database** (PostgreSQL, MySQL, or SQLite)
+- **Project dependencies** (installed via `pip`)
+
+---
+
+### **Installation Steps**
+
+1. **Clone the repository:**
     ```bash
     git clone https://github.com/Pedroffda/boilerplate-fastapi.git
     cd boilerplate-fastapi
     ```
 
-2. **Crie um ambiente virtual:**
+2. **Create a virtual environment:**
     ```bash
     python -m venv venv
-    source venv/bin/activate  # Para Linux/Mac
-    venv\Scripts\activate  # Para Windows
+    source venv/bin/activate  # For Linux/Mac
+    venv\Scripts\activate  # For Windows
     ```
 
-3. **Instale as dependências:**
+3. **Install dependencies:**
     ```bash
     pip install -r requirements.txt
     ```
 
-4. **Configure as variáveis de ambiente no arquivo `.env`:**
+4. **Configure environment variables in the `.env` file:**
     ```env
     DATABASE_URL=postgresql://fastapi_user:password123@localhost:5432/fastapi_db
     SECRET_KEY=secret
@@ -67,94 +68,90 @@ A API do projeto **Boilerplate** foi desenvolvida para fornecer funcionalidades 
     SMTP_PORT=port
     ```
 
-5. **Aplique as migrações no banco de dados:**
+5. **Apply database migrations:**
     ```bash
     alembic upgrade head
     ```
 
-
-6. **Inicie o servidor da API:**
+6. **Start the API server:**
     ```bash
     uvicorn app.main:app --reload
     ```
 
 ---
 
+## ⚙️ **Useful Commands**
 
-
-## ⚙️ **Comandos Úteis**
-
-### **Executar a API**
+### **Run the API**
 ```bash
 uvicorn app.main:app --reload
 ```
 
-### **Criar uma nova migração Alembic**
+### **Create a new Alembic migration**
 ```bash
-alembic revision --autogenerate -m "nome-da-migracao"
+alembic revision --autogenerate -m "migration-name"
 ```
 
-### **Aplicar migrações no banco de dados**
+### **Apply database migrations**
 ```bash
 alembic upgrade head
 ```
 
-### **Reverter a última migração**
+### **Revert the last migration**
 ```bash
 alembic downgrade -1
 ```
 
 ---
 
-## 📚 **Documentação da API**
-Acesse a documentação da API no navegador:
+## 📚 **API Documentation**
+Access the API documentation in your browser:
 
 - **Swagger**: [http://127.0.0.1:8000/docs](http://127.0.0.1:8000/docs)
 - **Redoc**: [http://127.0.0.1:8000/redoc](http://127.0.0.1:8000/redoc)
 
 ---
 
-## 👨‍💻 **Configuração do Usuário Administrador**
+## 👨‍💻 **Admin User Setup**
 
-O sistema inclui um comando CLI para criar automaticamente o usuário admin inicial com todas as permissões.
+The system includes a CLI command to automatically create the initial admin user with all permissions.
 
-### Como criar o usuário admin:
+### How to create the admin user:
 
-#### Opção 1: Modo interativo (recomendado para desenvolvimento)
+#### Option 1: Interactive mode (recommended for development)
 ```bash
 python cli.py interactive
 ```
-O sistema irá solicitar:
-- Email do administrador
-- Senha (a entrada será ocultada)
+The system will prompt for:
+- Admin email
+- Password (input will be hidden)
 
-#### Opção 2: Modo direto (para automação)
+#### Option 2: Direct mode (for automation)
 ```bash
-python cli.py create --email admin@dominio.com --password SuaSenhaSegura
+python cli.py create --email admin@domain.com --password YourSecurePassword
 ```
 
-### Permissões padrão do admin:
-- Acesso completo a todos os recursos (`*`)
-- Permissões `ALLOW` para todas as ações
-- Política de acesso global
+### Default admin permissions:
+- Full access to all resources (`*`)
+- `ALLOW` permissions for all actions
+- Global access policy
 
-
-### Estrutura do usuário admin:
+### Admin user structure:
 ```yaml
-id: UUID único
-nome: "Administrador"
-email: configurado pelo usuário
-senha: hash bcrypt
-permissões:
-  - efeito: allow
-  - recursos: ["*"]
-  - ações: ["*"]
+id: Unique UUID
+name: "Administrator"
+email: user-configured
+password: bcrypt hash
+permissions:
+  - effect: allow
+  - resources: ["*"]
+  - actions: ["*"]
 ```
 
 ---
 
-Observações:
-1. Os comandos assumem que o arquivo `cli.py` está na raiz do projeto
-2. As variáveis de ambiente são opcionais
-3. A senha é sempre hasheada antes de ser armazenada
-4. O sistema verifica se o admin já existe antes de criar
+Notes:
+1. Commands assume `cli.py` is in the project root
+2. Environment variables are optional
+3. Password is always hashed before storage
+4. System checks if admin already exists before creation
